@@ -1,0 +1,114 @@
+package com.ridgecrest.mail;
+
+import java.io.File;
+import java.io.IOException;
+
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.PlayerEditBookEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.server.ServerLoadEvent;
+import org.bukkit.inventory.Inventory;
+
+
+public class Listeners implements Listener {
+	References references = new References();
+	MCMail mcMail = new MCMail();
+	Main plugin;
+	static String recipient = "";
+	static String message = "";
+	@EventHandler
+	public void createMCMail(ServerLoadEvent event) {
+		mcMail.createFile("C:\\Users\\Ninja\\Desktop\\MC\\MCServer\\mcmail.txt");
+	}
+	@EventHandler
+	public void createPlayerInbox(PlayerJoinEvent event) {
+		Player player = event.getPlayer();
+		if (!player.getInventory().contains(references.mail())) {
+			player.getInventory().addItem(references.mail());
+		}
+		try {
+			File textFile = new File("C:\\Users\\Ninja\\Desktop\\MC\\MCServer\\" + player.getDisplayName() + ".txt");
+			if (textFile.createNewFile() == true) {
+				System.out.println("Sucessful file creation.");
+			}
+			else {
+				System.out.println("File is already existing.");
+				mcMail.readFile(com.ridgecrest.mail.MCMail.MCMail, message);
+			}
+		}
+		catch (IOException e) {
+			System.out.println("Unsucessful file creation");
+			e.printStackTrace();
+		}
+	}
+	@EventHandler
+	public void MCMail(InventoryClickEvent event) {
+		Player player = (Player) event.getWhoClicked();
+		if (event.getView().getTitle().equals(player.getDisplayName() + "'s Mailbox")) {
+			event.setCancelled(true);
+			if (event.getRawSlot() == 0) {
+				Inventory confirmSubject = Bukkit.getServer().createInventory(player, 9, player.getDisplayName() + "'s Email");
+				confirmSubject.setItem(0, references.confirmSubject());
+				confirmSubject.setItem(8, references.deny());
+				player.openInventory(confirmSubject);
+			}
+			if (event.getRawSlot() == 8) {
+				player.closeInventory();
+			}
+		}
+		if (event.getView().getTitle().equals(player.getDisplayName() + "'s Email")) {
+			event.setCancelled(true);
+			if (event.getRawSlot() == 0) {
+				player.sendMessage(recipient + " is your targeted user.");
+				Inventory confirmMessage = Bukkit.getServer().createInventory(player, 9, player.getDisplayName() + "'s Message");
+				confirmMessage.setItem(0, references.confirmMessage());
+				confirmMessage.setItem(8, references.deny());
+				player.openInventory(confirmMessage);
+			}
+			if (event.getRawSlot() == 8) {
+				player.closeInventory();
+			}
+		}
+		if (event.getView().getTitle().equals(player.getDisplayName() + "'s Message")) {
+			event.setCancelled(true);
+			if (event.getRawSlot() == 0) {
+				Inventory confirmMessage = Bukkit.getServer().createInventory(player, 9, "Confirm message");
+				confirmMessage.setItem(0, references.confirmMessage());
+				confirmMessage.setItem(8, references.deny());
+				player.openInventory(confirmMessage);
+			}
+			if (event.getRawSlot() == 8) {
+				player.closeInventory();
+			}
+		}
+		if (event.getView().getTitle().equals("Confirm message")) {
+			event.setCancelled(true);
+			if (event.getRawSlot() == 0) {
+				player.closeInventory();
+				player.sendMessage("Message sent!");
+				try {
+					com.ridgecrest.mail.MCMail.MCMail.put(recipient, message);
+					mcMail.writeFile(MCMail.MCMail.toString(), "C:\\Users\\Ninja\\Desktop\\MC\\MCServer\\" + recipient + ".txt");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}			}
+			if (event.getRawSlot() == 8) {
+				player.closeInventory();
+			}
+		}
+	}
+	@EventHandler
+	public void messageCreation(PlayerEditBookEvent event) {
+		Player player = event.getPlayer();
+		recipient = event.getNewBookMeta().getTitle();
+		message = event.getNewBookMeta().getPage(1);
+		Inventory mailGUI = Bukkit.getServer().createInventory(player, 9, player.getDisplayName() + "'s Mailbox");
+		mailGUI.setItem(0, references.sendMail());
+		mailGUI.setItem(8, references.deny());
+		player.openInventory(mailGUI);
+	}
+}

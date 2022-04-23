@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="org.bukkit.block.Block"/>
+    <fullyQualifiedTypeName name="org.bukkit.inventory.Inventory"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="org.bukkit.ChatColor"/>
+    <fullyQualifiedTypeName name="org.bukkit.event.inventory.InventoryOpenEvent"/>
+    <fullyQualifiedTypeName name="net.md_5.bungee.api.ChatColor"/>
+    <fullyQualifiedTypeName name="org.bukkit.event.player.PlayerInteractEvent"/>
+    <fullyQualifiedTypeName name="org.bukkit.event.block.Action"/>
+    <fullyQualifiedTypeName name="org.bukkit.material.Chest"/>
+    <fullyQualifiedTypeName name="org.bukkit.block.data.type.Chest"/>
+    <fullyQualifiedTypeName name="org.bukkit.block.Chest"/>
+    <fullyQualifiedTypeName name="java.io.File"/>
+    <fullyQualifiedTypeName name="java.io.IOException"/>
+    <fullyQualifiedTypeName name="java.util.Scanner"/>
+    <fullyQualifiedTypeName name="org.bukkit.Bukkit"/>
+    <fullyQualifiedTypeName name="org.bukkit.conversations.Conversation"/>
+    <fullyQualifiedTypeName name="com.ridgecrest.mail.Main"/>
+    <fullyQualifiedTypeName name="org.bukkit.conversations.Prompt"/>
+    <fullyQualifiedTypeName name="com.ridgecrest.mail.MCMail"/>
+    <fullyQualifiedTypeName name="org.bukkit.Material"/>
+</qualifiedTypeNameHistroy>

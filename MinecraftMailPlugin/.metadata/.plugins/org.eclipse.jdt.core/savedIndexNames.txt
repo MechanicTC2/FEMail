@@ -1,0 +1,5 @@
+INDEX VERSION 1.131+E:\MC\MinecraftMailPlugin\.metadata\.plugins\org.eclipse.jdt.core
+1167275426.index
+1865797976.index
+3764108959.index
+2497696406.index
