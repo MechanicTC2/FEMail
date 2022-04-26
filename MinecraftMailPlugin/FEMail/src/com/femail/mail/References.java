@@ -52,7 +52,7 @@ public class References {
 		ItemMeta meta = deny.getItemMeta();
 		meta.setDisplayName("Stop");
 		ArrayList<String> lore = new ArrayList<>();
-		lore.add("Exit MCMail.");
+		lore.add("Exit FEMail.");
 		meta.setLore(lore);
 		deny.setItemMeta(meta);
 		return deny;
@@ -62,7 +62,7 @@ public class References {
 		ItemMeta meta = mail.getItemMeta();
 		meta.setDisplayName("Message Book");
 		ArrayList<String> lore = new ArrayList<>();
-		lore.add("MCMail!");
+		lore.add("FEMail!");
 		meta.setLore(lore);
 		mail.setItemMeta(meta);
 		return mail;
